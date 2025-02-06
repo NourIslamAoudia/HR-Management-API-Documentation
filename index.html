@@ -131,6 +131,59 @@
             color: var(--text-secondary);
             margin: 1rem 0;
         }
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+        }
+
+        .sidebar {
+            width: 100%;
+            height: auto;
+            position: static;
+            padding: 1rem;
+            border-right: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .main-content {
+            margin-left: 0;
+            padding: 1rem;
+        }
+
+        .logo {
+            margin-bottom: 1rem;
+        }
+
+        .endpoint {
+            padding: 1rem;
+        }
+
+        .endpoint-title {
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: flex-start;
+        }
+
+        .method {
+            margin-bottom: 0.5rem;
+        }
+
+        pre {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .endpoint-path {
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .parameters {
+            padding: 0.5rem;
+        }
+    }
     </style>
 </head>
 <body>
