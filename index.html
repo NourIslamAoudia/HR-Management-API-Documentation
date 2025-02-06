@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Management API Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <link rel="icon" type="image/x-icon" href="cloud-api.png">
+    <style>
+        :root {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #646cff;
+            --border: #3f3f3f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-right: 1px solid var(--border);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            margin-left: 260px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+
+        .nav-item {
+            margin: 0.5rem 0;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .endpoint {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .get { background: #2d8632; }
+        .post { background: #2d86ce; }
+        .put { background: #b8900c; }
+
+        .endpoint-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .endpoint-path {
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        .parameters {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        .parameter {
+            margin-bottom: 0.5rem;
+        }
+
+        .parameter-name {
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        h2 {
+            color: var(--accent);
+            margin: 2rem 0 1rem;
+        }
+
+        .description {
+            color: var(--text-secondary);
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="logo">HR Management API</div>
+            <ul>
+                <li class="nav-item"><a href="#introduction" class="nav-link">Introduction</a></li>
+                <li class="nav-item"><a href="#authentication" class="nav-link">Authentication</a></li>
+                <li class="nav-item"><a href="#employees" class="nav-link">Employees</a></li>
+                <li class="nav-item"><a href="#tasks" class="nav-link">Tasks</a></li>
+                <li class="nav-item"><a href="#history" class="nav-link">History</a></li>
+                <li class="nav-item"><a href="#hr" class="nav-link">HR Management</a></li>
+                <li class="nav-item"><a href="#leave" class="nav-link">Leave & Absence</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <section id="introduction">
+                <h2>Introduction</h2>
+                <p class="description">
+                    The HR Management API provides endpoints for managing employees, tasks, and human resources operations.
+                    Base URL: <code>http://your-api-domain.com</code>
+                </p>
+            </section>
+
+            <section id="authentication">
+                <h2>Authentication</h2>
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-path">/auth/login</span>
+                    </div>
+                    <p class="description">Authenticate user and receive access token</p>
+                    <div class="parameters">
+                        <div class="parameter">
+                            <span class="parameter-name">Request Body:</span>
+                            <pre><code class="language-json">{
+    "username": "string",
+    "password": "string"
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-path">/add/admin</span>
+                    </div>
+                    <p class="description">Create new admin account</p>
+                    <div class="parameters">
+                        <div class="parameter">
+                            <span class="parameter-name">Request Body:</span>
+                            <pre><code class="language-json">{
+    "username": "string",
+    "password": "string",
+    "email": "string",
+    "role": "string"
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="employees">
+                <h2>Employees</h2>
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/emp</span>
+                    </div>
+                    <p class="description">Get all employees</p>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-path">/add_employe</span>
+                    </div>
+                    <p class="description">Create new employee</p>
+                    <div class="parameters">
+                        <div class="parameter">
+                            <span class="parameter-name">Request Body:</span>
+                            <pre><code class="language-json">{
+    "username": "string",
+    "password": "string",
+    "nom": "string",
+    "prenom": "string",
+    "email": "string",
+    "telephone": "string",
+    "adresse": "string",
+    "departement": "string",
+    "poste": "string",
+    "date_embauche": "string",
+    "status": "string"
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method put">PUT</span>
+                        <span class="endpoint-path">/update/employe/{employe_username}</span>
+                    </div>
+                    <p class="description">Update employee information</p>
+                    <div class="parameters">
+                        <div class="parameter">
+                            <span class="parameter-name">Request Body:</span>
+                            <pre><code class="language-json">{
+    "username": "string",
+    "password": "string",
+    "nom": "string",
+    "prenom": "string",
+    "email": "string",
+    "telephone": "string",
+    "adresse": "string",
+    "departement": "string",
+    "poste": "string",
+    "date_embauche": "string",
+    "status": "string"
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-path">/employee/profile</span>
+                    </div>
+                    <p class="description">Get employee profile</p>
+                    <div class="parameters">
+                        <div class="parameter">
+                            <span class="parameter-name">Request Body:</span>
+                            <pre><code class="language-json">{
+    "username": "string"
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tasks">
+                <h2>Tasks</h2>
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/TACHE</span>
+                    </div>
+                    <p class="description">Get all tasks</p>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/employee/tasks</span>
+                    </div>
+                    <p class="description">Get tasks for specific employee</p>
+                    <div class="parameters">
+                        <div class="parameter">
+                            <span class="parameter-name">Query Parameters:</span>
+                            <pre><code class="language-json">{
+    "username": "string"
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method put">PUT</span>
+                        <span class="endpoint-path">/employee/tasks/{task_id}</span>
+                    </div>
+                    <p class="description">Update task status</p>
+                    <div class="parameters">
+                        <div class="parameter">
+                            <span class="parameter-name">Request Body:</span>
+                            <pre><code class="language-json">{
+    "new_status": "string"
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/EMPLOYE-TACHE</span>
+                    </div>
+                    <p class="description">Get all employee-task assignments</p>
+                </div>
+            </section>
+
+            <section id="history">
+                <h2>History</h2>
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/HISTORIQUE</span>
+                    </div>
+                    <p class="description">Get complete history records</p>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/employee/check-history</span>
+                    </div>
+                    <p class="description">Get history for specific employee</p>
+                    <div class="parameters">
+                        <div class="parameter">
+                            <span class="parameter-name">Query Parameters:</span>
+                            <pre><code class="language-json">{
+    "username": "string"
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="hr">
+                <h2>HR Management</h2>
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/RH</span>
+                    </div>
+                    <p class="description">Get all HR personnel</p>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method post">POST</span>
+                        <span class="endpoint-path">/add_RH</span>
+                    </div>
+                    <p class="description">Add new HR personnel</p>
+                    <div class="parameters">
+                        <div class="parameter">
+                            <span class="parameter-name">Request Body:</span>
+                            <pre><code class="language-json">{
+    "username": "string",
+    "password": "string",
+    "nom": "string",
+    "prenom": "string",
+    "email": "string",
+    "telephone": "string",
+    "departement": "string",
+    "role": "string"
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="leave">
+                <h2>Leave & Absence</h2>
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/CONGE</span>
+                    </div>
+                    <p class="description">Get all leave requests</p>
+                </div>
+
+                <div class="endpoint">
+                    <div class="endpoint-title">
+                        <span class="method get">GET</span>
+                        <span class="endpoint-path">/ABSCENCE</span>
+                    </div>
+                    <p class="description">Get all absence records</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-json.min.js"></script>
+</body>
+</html>
